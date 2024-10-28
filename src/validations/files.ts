@@ -2,13 +2,16 @@ import { ImageData } from '../models/File.model';
 import FileUtils from '../utils/file';
 
 const validateFile = async (data: ImageData): Promise<null | string> => {
-  const { height, name, width } = data;
+  const { height, filename: name, width } = data;
   // Check if the requested file exists
+  if (!name) {
+    return 'Invalid file name. Please enter a valid file name';
+  }
   if (!(await FileUtils.isExistImageName(name))) {
     const availableImageNames: string = (
       await FileUtils.getCurrentImageNames()
     ).join(', ');
-    return `The filename '${name}' does not exist. Available filenames are: ${availableImageNames}.`;
+    return `The filename '${name ?? ''}' does not exist. Available filenames are: ${availableImageNames}.`;
   }
 
   // Return early if no size values are provided

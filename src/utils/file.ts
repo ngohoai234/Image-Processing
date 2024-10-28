@@ -10,8 +10,8 @@ class FileUtils {
   static resizePathImage = path.resolve(__dirname, '../assets/images/resize');
 
   static async getFullPathImage(data: ImageData) {
-    const { name, width, height } = data;
-    if (isStringEmpty(name)) {
+    const { filename, width, height } = data;
+    if (isStringEmpty(filename)) {
       return null;
     }
 
@@ -19,9 +19,9 @@ class FileUtils {
       width && height
         ? path.resolve(
             FileUtils.resizePathImage,
-            `${name}-${width}x${height}.jpg`
+            `${filename}-${width}x${height}.jpg`
           )
-        : path.resolve(FileUtils.basePathImage, `${name}.jpg`);
+        : path.resolve(FileUtils.basePathImage, `${filename}.jpg`);
     console.log(FileUtils.basePathImage);
 
     return await fs
@@ -54,19 +54,20 @@ class FileUtils {
   }
 
   static async isAvailableResizeImage(data: ImageData) {
-    const { height, name, width } = data;
-    if (!height || !name || !width) {
+    const { height, filename, width } = data;
+    if (!height || !filename || !width) {
       return false;
     }
 
     try {
       const pathImage: string = path.resolve(
         FileUtils.resizePathImage,
-        `${name}-${width}x${height}.jpg`
+        `${filename}-${width}x${height}.jpg`
       );
       await fs.access(pathImage);
       return true;
-    } catch (error) {
+    } catch (error: unknown) {
+      console.log(error);
       return false;
     }
   }
@@ -74,23 +75,24 @@ class FileUtils {
   static async makeResizeImagePath() {
     try {
       await fs.access(FileUtils.resizePathImage);
-    } catch (error) {
+    } catch (error: unknown) {
+      console.log(error);
       fs.mkdir(FileUtils.resizePathImage);
     }
   }
 
   static async makeResizeImage(data: ImageData) {
-    const { height, name, width } = data;
-    if (!height || !name || !width) {
+    const { height, filename, width } = data;
+    if (!height || !filename || !width) {
       return null;
     }
     const basePath: string = path.resolve(
       FileUtils.basePathImage,
-      `${name}.jpg`
+      `${filename}.jpg`
     );
     const resizePath: string = path.resolve(
       FileUtils.resizePathImage,
-      `${name}-${width}x${height}.jpg`
+      `${filename}-${width}x${height}.jpg`
     );
 
     return await changeResizeImage({

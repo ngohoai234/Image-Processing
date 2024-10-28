@@ -46,6 +46,7 @@ images.get(
       }
     } catch (err) {
       // General error handling
+      console.log(err);
       response
         .status(500)
         .send('An unexpected error occurred. Please try again later.');

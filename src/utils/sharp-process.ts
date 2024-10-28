@@ -7,6 +7,7 @@ const changeResizeImage = async (data: sharpResize): Promise<null | string> => {
     await sharp(source).resize(width, height).toFormat('jpeg').toFile(target);
     return null;
   } catch (err) {
+    console.log(err);
     return 'Error with image';
   }
 };

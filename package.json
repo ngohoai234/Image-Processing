@@ -8,7 +8,7 @@
     "jasmine": "jasmine",
     "test": "npm run build && npm run jasmine",
     "start": "nodemon src/index.ts",
-    "lint": "eslint . --ext .ts",
+    "lint": "eslint src/**/*.ts",
     "prettify": "prettier --config .prettierrc.json 'src' --write"
   },
   "repository": {
@@ -30,14 +30,15 @@
     "supertest": "^7.0.0"
   },
   "devDependencies": {
+    "@eslint/js": "^9.13.0",
     "@types/express": "^5.0.0",
     "@types/jasmine": "^5.1.4",
     "@types/node": "^22.7.5",
     "@types/sharp": "^0.32.0",
     "@types/supertest": "^6.0.2",
-    "@typescript-eslint/eslint-plugin": "^8.8.1",
-    "@typescript-eslint/parser": "^8.8.1",
-    "eslint": "^9.12.0",
+    "@typescript-eslint/eslint-plugin": "^8.11.0",
+    "@typescript-eslint/parser": "^8.11.0",
+    "eslint": "^9.13.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-prettier": "^5.2.1",
     "globals": "^15.11.0",
@@ -45,6 +46,6 @@
     "prettier": "^3.3.3",
     "ts-node": "^10.9.2",
     "typescript": "^5.6.3",
-    "typescript-eslint": "^8.8.1"
+    "typescript-eslint": "^8.11.0"
   }
 }

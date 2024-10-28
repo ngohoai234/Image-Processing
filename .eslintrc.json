@@ -32,6 +32,7 @@
         "asyncArrow": "always"
       }
     ],
-    "no-extra-boolean-cast": "off"
+    "no-extra-boolean-cast": "off",
+    "ignores": ["node_modules/", "dist/"]
   }
 }

@@ -1,5 +1,5 @@
 export interface ImageData {
-  name: string;
+  filename: string;
   width: string;
   height: string;
 }
