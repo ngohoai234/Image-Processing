@@ -11,18 +11,18 @@ class FileUtils {
 
   static async getFullPathImage(data: ImageData) {
     const { filename, width, height } = data;
+    let filePath = path.resolve(FileUtils.basePathImage, `${filename}.jpg`);
+
     if (isStringEmpty(filename)) {
       return null;
     }
 
-    const filePath =
-      width && height
-        ? path.resolve(
-            FileUtils.resizePathImage,
-            `${filename}-${width}x${height}.jpg`
-          )
-        : path.resolve(FileUtils.basePathImage, `${filename}.jpg`);
-    console.log(FileUtils.basePathImage);
+    if (!isStringEmpty(width) && !isStringEmpty(height)) {
+      filePath = path.resolve(
+        FileUtils.resizePathImage,
+        `${filename}-${width}x${height}.jpg`
+      );
+    }
 
     return await fs
       .access(filePath)
